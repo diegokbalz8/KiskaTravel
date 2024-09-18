@@ -12,17 +12,17 @@ function searchCondition() {
             const condition = data.countries.find(item => item.name.toLowerCase() === input);
             console.log('Condition found:', condition);  // Log the found condition
 
-            if (condition) {
-                const name = condition.name;
-                const cities = condition.cities.join(', ');
-                const treatment = condition.treatment;
-    
-                resultDiv.innerHTML += `<h2>${condition.name}</h2>`;
-                resultDiv.innerHTML += `<img src="${condition.imagesrc}" alt="hjh">`;
+            if (condition) {                
+                condition.cities.forEach(city => {
+                    const cityName = city.name;
+                    const cityImage = city.imageUrl;
+                    const cityDescription = city.description;
 
-                resultDiv.innerHTML += `<p><strong>Symptoms:</strong> ${name}</p>`;
-                resultDiv.innerHTML += `<p><strong>Prevention:</strong> ${cities}</p>`;
-                resultDiv.innerHTML += `<p><strong>Treatment:</strong> ${treatment}</p>`;
+                    // Append the city details and image to the resultDiv
+                    resultDiv.innerHTML += `<h3>${cityName}</h3>`;
+                    resultDiv.innerHTML += `<img src="${cityImage}" alt="${cityName}">`;
+                    resultDiv.innerHTML += `<p><strong>Description:</strong> ${cityDescription}</p>`;
+                });                
             } else {
                 resultDiv.innerHTML = 'Condition not found.';
             }
